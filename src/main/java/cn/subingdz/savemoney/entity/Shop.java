@@ -25,7 +25,7 @@ public class Shop {
     /**
      * 购物车里，该店铺的商品集
      */
-    private Map<Integer,Integer> goodsMap;
+    private HashMap<Integer,Integer> goodsMap;
     /**
      * 邮费
      */
@@ -89,8 +89,12 @@ public class Shop {
      */
     public void removeGoods(Goods goods) {
         if (Constant.NULL !=goods && this.goodsMap.containsKey(goods.getId())){
-            this.goodsMap.remove(goods.getId());
-            this.total -= goods.getPrice();
+            goodsMap.remove(goods.getId());
+            total -= goods.getPrice();
+            if (freightForFree && total < priceForFreeFreight){
+                total += freight;
+                freightForFree = false;
+            }
             logger.info("shop["+this.id+"]--goods删除成功！"+goods.toString());
         }else {
             logger.info("shop["+this.id+"]--goods删除失败！Goods不存在："+goods.toString());
@@ -105,7 +109,11 @@ public class Shop {
         return id;
     }
 
-    public Map<Integer, Integer> getGoodsMap() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public HashMap<Integer, Integer> getGoodsMap() {
         return goodsMap;
     }
 

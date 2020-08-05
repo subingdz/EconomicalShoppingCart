@@ -1,13 +1,12 @@
 package cn.subingdz.savemoney.entity;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ShoppingCart {
 
     private static ShoppingCart shoppingCart;
 
-    private Map<Integer , Shop> shopMap;
+    private HashMap<Integer , Shop> shopMap;
     private int total;
 
     static {
@@ -19,7 +18,7 @@ public class ShoppingCart {
         total = 0;
     }
 
-    public Map<Integer, Shop> getShopMap() {
+    public HashMap<Integer, Shop> getShopMap() {
         return shopMap;
     }
 
@@ -34,6 +33,14 @@ public class ShoppingCart {
     }
 
     public int getTotal() {
+        total = 0;
+        if (shopMap.size() > 0){
+            ArrayList<Shop> shopList = (ArrayList) shopMap.values();
+            for (Shop shop: shopList) {
+                total += shop.getTotal();
+            }
+            return total;
+        }
         return total;
     }
 
