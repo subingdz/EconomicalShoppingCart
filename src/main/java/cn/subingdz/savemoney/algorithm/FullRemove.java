@@ -6,8 +6,10 @@ import cn.subingdz.savemoney.util.Constant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * @author subingdz
+ */
 public class FullRemove {
     public static ShoppingCart addAllGoods(ShoppingCart shoppingCart){
         if (Constant.NULL == shoppingCart){
@@ -21,11 +23,7 @@ public class FullRemove {
         if (shopList.size() == 0){
             return shoppingCart;
         }
-        Shop[] shopArray = (Shop[]) shopList.toArray();
-        int shopNumber = shopArray.length;
-        for (int i = 0 ; i < shopNumber ; i++){
-            shopArray[i].setId(i);
-        }
+
         return shoppingCart;
     }
 }
